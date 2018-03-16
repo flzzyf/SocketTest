@@ -2,11 +2,10 @@
 using System.Net;
 using System.Net.Sockets;
 
-namespace SocketProject
-{
-    class MainClass
+
+    class Server
     {
-        public static void Main(string[] args)
+        public static void Main()
         {
             Console.WriteLine("Hello World!");
 
@@ -41,4 +40,4 @@ namespace SocketProject
             }
         }
     }
-}
+
