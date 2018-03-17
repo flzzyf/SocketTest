@@ -2,8 +2,10 @@
 
 public class MainClass
 {
-    static string ip = "127.0.0.1";
-    static int port = 1234;
+    //static string ip = "127.0.0.1";
+    //static string ip = "192.168.31.195";
+    static string ip = "192.168.31.182";
+    static int port = 7777;
 
     public static void Main()
     {
@@ -23,7 +25,6 @@ public class MainClass
 
                 if (str == "quit")
                 {
-                    //server.
                     return;
 
                 }
