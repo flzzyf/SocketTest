@@ -1,12 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProjectGuid>{8EC6E145-4DD4-4BFC-A348-C48493896817}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Socket</RootNamespace>
-    <AssemblyName>Socket</AssemblyName>
+    <RootNamespace>SocketProject</RootNamespace>
+    <AssemblyName>SocketProject</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
