@@ -2,40 +2,42 @@
 using System.Net;
 using System.Net.Sockets;
 
-namespace SocketProject
+class Client
 {
-    class Client
+    public const int BUFFER_SIZE = 1024;
+
+    public byte[] readBuff = new byte[BUFFER_SIZE];
+
+    public Socket socket;
+
+    public void Connect(string _host, int _port)
     {
-        public void Connect()
-        {
-            
-        }
-        /*
-        public static void Main()
-        {
-            IPAddress ip = IPAddress.Parse("127.0.0.1");
+        socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
-            IPEndPoint ipEndpoint = new IPEndPoint(ip, 1234);
+        socket.Connect(_host, _port);
 
-            Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+        Util.Out("连接成功，客户端ip：" + socket.LocalEndPoint.ToString(), 1);
+        Util.Out("现在可输入内容进行发送");
 
-            socket.Connect(ipEndpoint);
-
-            Console.WriteLine(ipEndpoint.ToString());
-
-            string str = "Lemon";
-
-            byte[] bytes = System.Text.Encoding.Default.GetBytes(str);
-            socket.Send(bytes);
-
-
-            //int count = socket.Receive(readBuff);
-
-            //str = System.Text.Encoding.UTF8.GetString(readBuff, 0, count);
-
-            Console.WriteLine(str);
-
-            socket.Close();
-        }*/
+        socket.BeginReceive(readBuff, 0, BUFFER_SIZE, SocketFlags.None, ReceiveCB, null);
     }
+
+    void ReceiveCB(IAsyncResult _ar)
+    {
+        int count = socket.EndReceive(_ar);
+
+        string str = System.Text.Encoding.UTF8.GetString(readBuff, 0, count);
+
+        Util.Out("接受信息：" + str);
+
+        socket.BeginReceive(readBuff, 0, BUFFER_SIZE, SocketFlags.None, ReceiveCB, null);
+    }
+
+    public void Send(string _str)
+    {
+        byte[] bytes = System.Text.Encoding.Default.GetBytes(_str);
+
+        socket.Send(bytes);
+    }
+
 }

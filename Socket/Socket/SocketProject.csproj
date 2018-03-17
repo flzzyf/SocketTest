@@ -37,6 +37,7 @@
     <Compile Include="Conn.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="MainClass.cs" />
+    <Compile Include="Util.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -2,55 +2,52 @@
 using System.Net;
 using System.Net.Sockets;
 
-namespace SocketProject
+public class Conn
 {
-    public class Conn
+    public const int BUFFER_SIZE = 1024;
+
+    public Socket socket;
+
+    public bool inUse = false;
+
+    public byte[] readBuff = new byte[BUFFER_SIZE];
+
+    public int buffCount = 0;
+
+    public Conn()
     {
-        public const int BUFFER_SIZE = 1024;
+        readBuff = new byte[BUFFER_SIZE];
 
-        public Socket socket;
+    }
 
-        public bool inUse = false;
+    public void Init(Socket _socket)
+    {
+        this.socket = _socket;
+        inUse = true;
+        buffCount = 0;
+    }
 
-        public byte[] readBuff = new byte[BUFFER_SIZE];
+    public int BuffRemain()
+    {
+        return BUFFER_SIZE - buffCount;
+    }
 
-        public int buffCount = 0;
+    public string GetAddress()
+    {
+        if (!inUse)
+            return "尚未连接";
 
-        public Conn()
+        return socket.RemoteEndPoint.ToString();
+    }
+
+    public void Close()
+    {
+        if (inUse)
         {
-            readBuff = new byte[BUFFER_SIZE];
-
+            Console.WriteLine("断开连接：" + GetAddress());
+            socket.Close();
+            inUse = false;
         }
 
-        void Init(Socket _socket)
-        {
-            this.socket = _socket;
-            inUse = true;
-            buffCount = 0;
-        }
-
-        public int BuffRemain()
-        {
-            return BUFFER_SIZE - buffCount;
-        }
-
-        public string GetAddress()
-        {
-            if (!inUse)
-                return "尚未连接";
-
-            return socket.RemoteEndPoint.ToString();
-        }
-
-        public void Close()
-        {
-            if (inUse)
-            {
-                Console.WriteLine("断开连接：" + GetAddress());
-                socket.Close();
-                inUse = false;
-            }
-
-        }
     }
 }
